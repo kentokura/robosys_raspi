@@ -1,6 +1,7 @@
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
+#include <linux/device.h>
 MODULE_AUTHOR("Ken Tokura");
 MODULE_DESCRIPTION("driver for LED control");
 MODULE_LICENSE("GPL");
@@ -46,12 +47,15 @@ static int __init init_mod(void) //カーネルモジュールの初期化
 		return PTR_ERR(cls);
 	}
 
+	// デバイス情報の作成
+	device_create(cls, NULL, dev, NULL, "myled%d",MINOR(dev));
 	return 0;
 }
 
 static void __exit cleanup_mod(void) //後始末
 {
 	cdev_del(&cdv); //キャラクタデバイスの破棄
+	device_destroy(cls, dev); //デバイス情報の削除
 	class_destroy(cls);// クラスの削除
 	unregister_chrdev_region(dev, 1); //デバイス番号の開放
 	printk(KERN_INFO "%s is unloaded. major:%d\n",__FILE__,MAJOR(dev));
