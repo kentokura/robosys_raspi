@@ -8,6 +8,7 @@ MODULE_VERSION("0.1");
 
 static dev_t dev;
 static struct cdev cdv;
+static struct class *cls = NULL;
 
 static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_t* pos)
 {
@@ -38,6 +39,12 @@ static int __init init_mod(void) //カーネルモジュールの初期化
 		printk(KERN_ERR "cdev_add failed. major:%d, minor:%d",MAJOR(dev),MINOR(dev));
 		return retval;
 	}
+	// クラスの作成
+	cls = class_create(THIS_MODULE,"myled");
+	if(IS_ERR(cls)){
+		printk(KERN_ERR "class_create failed.");
+		return PTR_ERR(cls);
+	}
 
 	return 0;
 }
@@ -45,6 +52,7 @@ static int __init init_mod(void) //カーネルモジュールの初期化
 static void __exit cleanup_mod(void) //後始末
 {
 	cdev_del(&cdv); //キャラクタデバイスの破棄
+	class_destroy(cls);// クラスの削除
 	unregister_chrdev_region(dev, 1); //デバイス番号の開放
 	printk(KERN_INFO "%s is unloaded. major:%d\n",__FILE__,MAJOR(dev));
 }
