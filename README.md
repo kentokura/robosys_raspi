@@ -1,6 +1,7 @@
 # robosys_raspi
 
-This is device module for Raspberry Pi 3 to put on LED.
+This is device module for Raspberry Pi 3 to put on LED. 
+In detail, please jump to [wiki](https://github.com/kentokura/robosys_raspi/wiki).
 
 ## Environment
 OS: Linux ubuntu 4.15.0-1038-raspi2 #40-Ubuntu SMP PREEMPT Thu Jun 6 07:34:33 UTC 2019 armv7l armv7l armv7l GNU/Linux
