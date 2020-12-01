@@ -4,7 +4,7 @@
 #include <linux/device.h>
 #include <linux/uaccess.h>
 #include <linux/io.h>
-MODULE_AUTHOR("Ken Tokura");
+MODULE_AUTHOR("Ken Tokura and ryouichi ueda");
 MODULE_DESCRIPTION("driver for LED control");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.1");
