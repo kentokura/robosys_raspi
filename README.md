@@ -60,4 +60,8 @@ sudo rmmod myled
 ```
 
 ## License
-Almost of this software is released under the MIT License, see LICENSE file in this package. Only libevent_if_libev plugin is released under the GNU General Public License ("GPL") version 2 or any later version. Please see LICENSE.GPL
+
+Copyright (c) 2020 KenTokura and ryuichi Ueda.
+Please see [This](https://github.com/kentokura/robosys_raspi/blob/master/LICENSE).
+
+
